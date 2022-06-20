@@ -140,6 +140,6 @@ func main() {
 			errLogger.Panicf(err.Error())
 		}
 
-		Validate(file, fileExt, loadedSchema)
+		_ = Validate(file, fileExt, loadedSchema)
 	}
 }

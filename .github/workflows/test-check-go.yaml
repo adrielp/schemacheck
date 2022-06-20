@@ -3,6 +3,8 @@
 name: Make Test and Checks
 
 on:
+  pull_request:
+    branches: [ main ]
   workflow_call:
 
 jobs:

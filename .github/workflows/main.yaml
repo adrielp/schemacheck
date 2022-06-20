@@ -1,0 +1,22 @@
+# This is the workflow for the main release branch.
+
+name: Main Build, Test, and Publish
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  test-check-go:
+    uses: ./.github/workflows/test-check-go.yaml
+
+  semrelease:
+    uses: ./.github/workflows/semrelease.yaml
+    needs: test-check-go
+    if:
+      contains('
+        refs/heads/main
+      ', github.ref)

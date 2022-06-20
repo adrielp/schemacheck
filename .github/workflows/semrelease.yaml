@@ -1,0 +1,22 @@
+# This workflow runs conventional commit checker, semantic release, and goreleaser.
+
+name: Semantic Release
+
+on:
+  workflow_call:
+
+jobs:
+
+  semrelease:
+
+    name: Sem Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - uses: go-semantic-release/action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          changelog-generator-opt: "emojis=true"

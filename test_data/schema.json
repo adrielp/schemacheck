@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/product.schema.json",
+  "title": "Environment",
+  "description": "A JSON File.",
+  "type": "object",
+  "properties": {
+      "key1": {
+          "description": "Super cool key name",
+          "type": "string"
+      },
+      "key2": {
+          "type": "object",
+          "properties": {
+              "name": {
+                  "description": "Super cool name",
+                  "type": "string"
+              },
+              "id": {
+                  "description": "Super cool ID number",
+                  "type": "integer"
+              },
+              "coolOrNot": {
+                  "description": "Whether or not we're cool",
+                  "type": "boolean"
+              }
+          }
+      },
+      "key3": {
+          "description": "Coolness factor",
+          "type": "integer"
+      }
+   },
+   "required": ["key1", "key2"]
+}

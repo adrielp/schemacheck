@@ -1,0 +1,9 @@
+{
+  "key1": "SithLord1",
+  "key2": {
+      "name": "Vader4Ever",
+      "id": 1,
+      "coolOrNot": true
+  },
+  "key3": 100
+}

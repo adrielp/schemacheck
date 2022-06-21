@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -14,11 +15,9 @@ import (
 
 // set default constants for usage messages and default file names
 const (
-	defaultSchema = "test_data/schema.json"
-	schemaUsage   = "A valid JSON schema file to use for validation. Default: schema.json"
+	schemaUsage = "A valid JSON schema file to use for validation. Default: schema.json"
 
-	defaultFileName = "test_data/values.json"
-	fileUsage       = "A Yaml or JSON file to check against a given schema. Default: values.json (can acceptable multiples)"
+	fileUsage = "A Yaml or JSON file to check against a given schema. Default: values.json (can acceptable multiples)"
 )
 
 // Gloval variables for flags and logger
@@ -34,9 +33,28 @@ var (
 
 // initialize the flags from the command line and their shorthand counterparts
 func init() {
-	defaultFile := []string{defaultFileName}
-	flag.StringVarP(&Schema, "schema", "s", defaultSchema, schemaUsage)
-	flag.StringSliceVarP(&File, "file", "f", defaultFile, fileUsage)
+	flag.StringVarP(&Schema, "schema", "s", "", schemaUsage)
+	flag.StringSliceVarP(&File, "file", "f", []string{}, fileUsage)
+}
+
+func CheckForEmptyArg() bool {
+	schemaArgEmpty := true
+	fileArgEmpty := true
+	flag.VisitAll(func(f *flag.Flag) {
+		if f.Name == "schema" {
+			if f.Changed {
+				schemaArgEmpty = false
+			}
+		} else if f.Name == "file" {
+			if f.Changed {
+				fileArgEmpty = false
+			}
+		}
+	})
+	if schemaArgEmpty || fileArgEmpty {
+		return true
+	}
+	return false
 }
 
 // Checks whether a given file is of the supported extension type and if not
@@ -114,6 +132,13 @@ func main() {
 	// parse the flags set in the init() function
 	flag.Parse()
 
+	// Check to ensure flags aren't empty
+	missingArgs := CheckForEmptyArg()
+	if missingArgs {
+		fmt.Fprintf(os.Stderr, "Usage of schemacheck\n")
+		flag.PrintDefaults()
+		errLogger.Fatal("One or more missing args not set.")
+	}
 	// Load schema file before running through and validating the other files to
 	// reduce how many times it's loaded.
 	schema, err := os.ReadFile(filepath.Clean(Schema))

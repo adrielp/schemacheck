@@ -11,7 +11,7 @@ tidy:
 	@go mod tidy
 
 build:
-	@go build -o dist/bin/schemacheck
+	@goreleaser build --rm-dist --skip-validate --snapshot
 
 release:
 	@goreleaser build --rm-dist 

@@ -22,18 +22,18 @@ find . -type f -name "*.json" -exec ./dist/bin/schemacheck -s test_data/schema.j
 ```
 
 ## Install
-There are a few different methods to install `schemacheck`.
+There are a couple different methods to install `schemacheck`.
 
-### Via `go` (Recommended)
-* Run `go install github.com/adrielp/schemacheck`
+### Preferred methods
+* Via `go` (recommended): `go install github.com/adrielp/schemacheck`
+* Via `brew`: `brew install schemacheck` (Mac / Linux)
+
 
 ### Mac/Linux during local development
-* Clone down this repository and run `make build`
-* Install a binary for your platform from `dist/bin` locally to a path
-
+* Clone down this repository and run `make install`
 
 ### Windows
-There's a binary for that, but it's not directly supported or tested because #windows
+There's a binary for that, but it's not directly supported or tested because `#windows`
 
 ## Getting Started
 ### Prereqs

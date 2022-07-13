@@ -26,7 +26,7 @@ There are a couple different methods to install `schemacheck`.
 
 ### Preferred methods
 * Via `go` (recommended): `go install github.com/adrielp/schemacheck`
-* Via `brew`: `brew install schemacheck` (Mac / Linux)
+* Via `brew`: `brew install adrielp/tap/schemacheck` (Mac / Linux)
 
 
 ### Mac/Linux during local development

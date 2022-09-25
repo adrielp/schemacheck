@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/fatih/color"
 	flag "github.com/spf13/pflag"
 	"github.com/xeipuuv/gojsonschema"
 	"sigs.k8s.io/yaml"
@@ -19,6 +20,7 @@ const (
 	fileUsage                = "A Yaml or JSON file to check against a given schema. Default: values.json (can acceptable multiples)"
 	versionUsage             = "Prints out the version of schemacheck"
 	ignoreValidationErrUsage = "Ignores when a document is not valid but provides a warning."
+	noColorUsage             = "Disables color usage for the logger"
 )
 
 // Core variables for flag pointers and info, warning, and error loggers.
@@ -27,6 +29,7 @@ var (
 	File                []string
 	Schema              string
 	IgnoreValidationErr bool
+	NoColor             bool
 	VersionFlag         bool
 
 	// version is set through ldflags by GoReleaser upon build, taking in the most recent tag
@@ -35,8 +38,8 @@ var (
 
 	// Info, warning, and error loggers.
 	logger     = log.New(os.Stderr, "INFO: ", log.Lshortfile)
-	warnLogger = log.New(os.Stderr, "WARN: ", log.Lshortfile)
-	errLogger  = log.New(os.Stderr, "ERROR: ", log.Lshortfile)
+	warnLogger = log.New(os.Stderr, color.HiYellowString("WARN: "), log.Lshortfile)
+	errLogger  = log.New(os.Stderr, color.HiRedString("ERROR: "), log.Lshortfile)
 )
 
 // Initialize the flags from the command line and their shorthand counterparts.
@@ -44,6 +47,7 @@ func init() {
 	flag.StringVarP(&Schema, "schema", "s", "", schemaUsage)
 	flag.StringSliceVarP(&File, "file", "f", []string{}, fileUsage)
 	flag.BoolVar(&IgnoreValidationErr, "ignore-val-err", false, ignoreValidationErrUsage)
+	flag.BoolVar(&NoColor, "no-color", false, noColorUsage)
 	flag.BoolVarP(&VersionFlag, "version", "v", false, versionUsage)
 }
 
@@ -147,6 +151,16 @@ func main() {
 	if VersionFlag {
 		fmt.Printf("schemacheck version: %s\n", version)
 		os.Exit(0)
+	}
+
+	// set first to false for CI based on fatih/color docs
+	color.NoColor = false
+	// set nocolor to true, and reset err and warn loggers because nocolor is not respected by logger definitions when set
+	// at var level
+	if NoColor {
+		color.NoColor = true
+		warnLogger = log.New(os.Stderr, "WARN: ", log.Lshortfile)
+		errLogger = log.New(os.Stderr, "ERROR: ", log.Lshortfile)
 	}
 
 	// Check to ensure required flags aren't empty

@@ -1,3 +1,6 @@
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/adrielp/schemacheck/badge)](https://api.securityscorecards.dev/projects/github.com/adrielp/schemacheck)
+![CodeQL](https://github.com/adrielp/schemacheck/workflows/CodeQL/badge.svg?branch=main)
+
 # schemacheck
 A CLI utility written in [go](go.dev) that validates `json` and `yaml` files
 against a `schema`.

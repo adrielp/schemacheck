@@ -1,7 +1,7 @@
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/adrielp/schemacheck/badge)](https://api.securityscorecards.dev/projects/github.com/adrielp/schemacheck)
 ![CodeQL](https://github.com/adrielp/schemacheck/workflows/CodeQL/badge.svg?branch=main)
 [![Go Report Card](https://goreportcard.com/badge/github.com/adrielp/schemacheck)](https://goreportcard.com/report/github.com/adrielp/schemacheck)
-![Tests Passing](https://github.com/adrielp/schemacheck/workflows/Make%20Test%20and%20Checks/badge.svg?branch=main)
+![Tests Passing](https://github.com/adrielp/schemacheck/workflows/Make%20Test%20and%20Checks/badge.svg)
 
 # schemacheck
 A CLI utility written in [go](go.dev) that validates `json` and `yaml` files

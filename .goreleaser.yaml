@@ -23,7 +23,7 @@ builds:
       - windows
       - darwin
     goarch:
-      - am64
+      - amd64
       - arm64
       - arm
       - i386

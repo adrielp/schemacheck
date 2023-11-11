@@ -26,7 +26,7 @@ builds:
       - amd64
       - arm64
       - arm
-      - i386
+      - 386
 
 archives:
   - format: tar.gz

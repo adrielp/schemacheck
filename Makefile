@@ -12,8 +12,8 @@ tidy:
 .PHONY: build
 build:
 	@goreleaser build \
-		--rm-dist \
-		--skip-validate \
+		--clean \
+		--skip=validate \
 		--single-target \
 		--output dist/$(BIN_NAME)
 
@@ -24,7 +24,7 @@ install: build
 
 .PHONY: release
 release:
-	@goreleaser build --rm-dist 
+	@goreleaser build --clean
 
 .PHONY: test
 test:

@@ -4,7 +4,7 @@ on:
   push:
     # run only against tags
     tags:
-      - '*'
+      - "*"
 
 permissions:
   contents: write
@@ -15,7 +15,6 @@ jobs:
   goreleaser:
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -37,3 +36,8 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.SCHEMACHECK_RELEASE_TOKEN }}
+
+      - name: Attest Provinance
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: "./dist/schemacheck**"

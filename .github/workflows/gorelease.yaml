@@ -39,6 +39,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SCHEMACHECK_RELEASE_TOKEN }}
 
       - name: Attest Provinance
-        uses: actions/attest-build-provenance@v1
+        uses: actions/attest-build-provenance@v2
         with:
           subject-path: "./dist/schemacheck**"

@@ -19,9 +19,9 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.4.0
 
-      - uses: go-semantic-release/action@v1
+      - uses: go-semantic-release/action@v1.24.1
         with:
           github-token: ${{ secrets.SCHEMACHECK_RELEASE_TOKEN }}
           changelog-generator-opt: "emojis=true"

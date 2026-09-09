@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.4.0
         with:
           fetch-depth: 0
 
@@ -25,12 +25,12 @@ jobs:
         run: git fetch --force --tags
 
       - name: Set up Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v5.6.0
         with:
-          go-version: 1.21
+          go-version: 1.21.13
 
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v6
+        uses: goreleaser/goreleaser-action@v6.4.0
         with:
           distribution: goreleaser
           version: latest
@@ -39,6 +39,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SCHEMACHECK_RELEASE_TOKEN }}
 
       - name: Attest Provinance
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v2.4.0
         with:
           subject-path: "./dist/schemacheck**"

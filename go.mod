@@ -1,6 +1,6 @@
 module github.com/adrielp/schemacheck
 
-go 1.21
+go 1.27.3
 
 require (
 	github.com/fatih/color v1.18.0
